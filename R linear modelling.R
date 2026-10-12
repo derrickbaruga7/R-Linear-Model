@@ -12,11 +12,15 @@
 library(tidyverse)
 library(tidymodels)
 
-# Set directory
-setwd('/Users/derrickmarkbavaudbaruga/Documents/spring 2023/csc 461 machine learning/topic 7')
+# Run from the repository root, or provide an explicit input path.
+data_path <- Sys.getenv("HOUSING_DATA_PATH", unset = "data/melbourne_housing.csv")
+if (!file.exists(data_path)) {
+  stop("Dataset not found: ", data_path,
+       ". Add the CSV under data/ or set HOUSING_DATA_PATH.")
+}
 
 # Read the data
-housing_data <- read.csv("melbourne_housing.csv")
+housing_data <- read.csv(data_path)
 
 # Clean the data
 # Examine for missing values
